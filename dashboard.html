@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | InfoMineral</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="survey.php">
+    <style>
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+        .sidebar {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 2rem;
+        }
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+        .sidebar-nav li {
+            margin-bottom: 1rem;
+        }
+        .sidebar-nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            transition: all 0.2s;
+        }
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .main-content {
+            padding: 2rem;
+            background-color: #f7fafc;
+        }
+        .dashboard-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1.5rem;
+
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .table th, .table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .table th {
+            background-color: #f8fafc;
+            font-weight: 600;
+        }
+        .badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-new { background-color: #bee3f8; color: #2b6cb0; }
+        .badge-read { background-color: #c6f6d5; color: #276749; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h4 style="font-family: var(--font-serif); margin-bottom: 0.5rem; color: Gold;">InfoMineral Database</h4>
+            <p style="font-size: 0.9rem; opacity: 0.7; color: Gold;" id="adminName">Admin Panel</p>
+            
+            <ul class="sidebar-nav">
+                <li><a href="#Survey" class="active" onclick="showSection('survey')">Survey</a></li>
+                <li><a href="#Survey ID" onclick="showSection('Survey ID')">Survey ID </a></li>
+                <li><a href="#" onclick="showSection('applications')"></a></li>
+                <li><a href="#" onclick="logout()" style="margin-top: 2rem; color: Red;">Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div id="messages-section">
+                <h1 style="margin-bottom: 1.5rem;">Survey</h1>
+                <div class="dashboard-card">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Survey ID</th>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Campus</th>
+                                <th>Age Range</th>
+                                <th>Gender</th>
+                                <th>Enumerator</th>
+                                
+
+
+                            </tr>
+                        </thead>
+
+                        <tbody id="messagesTableBody">
+                           <?php include 'get_surveys.php'; ?>
+                        </tbody>
+
+
+
+
+                        <tbody id="messagesTableBody">
+                            
+                               <?php include 'get_survey.php'; ?>
+
+                            <tr><td colspan="5">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="jobs-section" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h1>Survey ID</h1>
+                    <button class="btn btn-primary btn-sm" onclick="showJobModal()">Survey ID</button>
+                </div>
+                <div class="dashboard-card">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Department</th>
+                                <th>Closing Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jobsTableBody">
+                            <tr><td colspan="5">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- J Modal -->
+            <div id="jobModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000;">
+                <div style="background: white; padding: 2rem; border-radius: var(--radius-lg); width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto;">
+                    <h2 style="margin-bottom: 1.5rem;">Post New Job</h2>
+                    <form id="jobForm">
+                        <div class="form-group">
+                            <label class="form-label">Job Title</label>
+                            <input type="text" id="jobTitle" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Department</label>
+                            <input type="text" id="jobDepartment" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea id="jobDescription" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Requirements</label>
+                            <textarea id="jobRequirements" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Closing Date</label>
+                            <input type="date" id="jobClosingDate" class="form-control">
+                        </div>
+                        <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
+                            <button type="button" class="btn btn-outline" onclick="closeJobModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Job</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+<!-- Dash
+    <script>
+        // Check Auth
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        if (!userInfo || !userInfo.token) {
+            window.location.href = 'login.html';
+        }
+        document.getElementById('adminName').textContent = `Welcome, ${userInfo.name}`;
+
+        // Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.main-content > div').forEach(div => div.style.display = 'none');
+            document.getElementById(`${sectionId}-section`).style.display = 'block';
+            
+            document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if(sectionId === 'messages') loadMessages();
+            if(sectionId === 'jobs') loadJobs();
+        }
+
+        // Job Modal
+        function showJobModal() {
+            document.getElementById('jobModal').style.display = 'flex';
+        }
+
+        function closeJobModal() {
+            document.getElementById('jobModal').style.display = 'none';
+        }
+
+        document.getElementById('jobForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const jobData = {
+                title: document.getElementById('jobTitle').value,
+                department: document.getElementById('jobDepartment').value,
+                description: document.getElementById('jobDescription').value,
+                requirements: document.getElementById('jobRequirements').value,
+                closingDate: document.getElementById('jobClosingDate').value
+            };
+
+            try {
+                const res = await fetch('/api/jobs', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${userInfo.token}`
+                    },
+                    body: JSON.stringify(jobData)
+                });
+
+                if (res.ok) {
+                    alert('Job posted successfully!');
+                    closeJobModal();
+                    loadJobs();
+                    e.target.reset();
+                } else {
+                    alert('Failed to post job');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Error posting job');
+            }
+        });
+
+        // Load Messages
+        async function loadMessages() {
+            try {
+                const res = await fetch('/api/messages', {
+                    headers: { 'Authorization': `Bearer ${userInfo.token}` }
+                });
+                const messages = await res.json();
+                const tbody = document.getElementById('messagesTableBody');
+                tbody.innerHTML = messages.map(msg => `
+                    <tr>
+                        <td>${new Date(msg.createdAt).toLocaleDateString()}</td>
+                        <td>${msg.fullName}<br><small>${msg.phone}</small></td>
+                        <td>${msg.serviceType || '-'}</td>
+                        <td>${msg.message.substring(0, 50)}...</td>
+                        <td><span class="badge ${msg.status === 'new' ? 'badge-new' : 'badge-read'}">${msg.status}</span></td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Load Jobs
+        async function loadJobs() {
+            try {
+                const res = await fetch('/api/jobs');
+                const jobs = await res.json();
+                const tbody = document.getElementById('jobsTableBody');
+                tbody.innerHTML = jobs.map(job => `
+                    <tr>
+                        <td>${job.title}</td>
+                        <td>${job.department || '-'}</td>
+                        <td>${job.closingDate || '-'}</td>
+                        <td><span class="badge badge-read">${job.status}</span></td>
+                        <td><button class="btn btn-sm btn-outline">Edit</button></td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('userInfo');
+            window.location.href = 'login.html';
+        }
+
+        // Initial Load
+        loadMessages(); 
+    </script>
+    -->
+</body>
+</html>
