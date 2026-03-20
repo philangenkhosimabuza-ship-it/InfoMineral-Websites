@@ -18,9 +18,8 @@
             <div class="header-content">
                  <div class="logo">
                         <div class="logo-text" style="display: flex; justify-content: space-between; align-items: left;">
-                            <a href="home.html#home"><a href="#home"> <img src="logo.jpg" alt="InfoMineral Logo">
-                            </div> </a>
-                            <a href="home.html#home"> 
+                            <a href="index.html"><a href="#home"> <img src="logo.jpg" alt="InfoMineral Logo">
+                            </div>
                         
                             <div class="logo">
                             <span class="logo-name">InfoMineral</span>
@@ -30,19 +29,20 @@
                 </div>
                 <nav class="desktop-nav">
                     <ul>
-                        <li><a href="home.html" class="nav-link">Home</a></li>  
-                        <li><a href="about.html" class="nav-link">About Us</a></li>
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="about.html" class="nav-link ">About Us</a></li>
                         <li class="dropdown">
-                            <a href="#services" class="nav-link">Services</a>
+                            <a href="index.html#services" class="nav-link">Services</a>
                             <div class="dropdown-menu">
-                                 <a href="home.html#services">Data Collection</a>
-                                <a href="home.html#services">Data Cleaning</a>
+                                
+                                 <a href="index.html#services">Data Collection</a>
+                                <a href="index.html#services">Data Cleaning</a>
                                 
                             </div>
                         </li>
                         <!--DropDownManu
                         <li class="dropdown">
-                            <a href="" class="nav-link"></a>
+                            <a href="services/index.html" class="nav-link">Practice Areas</a>
                             <div class="dropdown-menu">
                                 <a href=""></a>
                                  <a href="#"></a>
@@ -59,7 +59,7 @@
                         <li><a href="reports.html" class="nav-link">Reports</a></li>
                     </ul>
                 </nav>
-                <div class="header-cta">
+                 <div class="header-cta">
                     <a href="login.html" class="contact-link">
                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                        <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
@@ -68,6 +68,7 @@
                         
                     </a>
                 </div>
+              
                 <button class="mobile-menu-btn">
                     <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 6h16M4 12h16M4 18h16"/>
@@ -88,13 +89,12 @@
         </div>
         <nav class="mobile-nav">
             <ul>
-                <li><a href="home.html" class="mobile-nav-link">Home</a></li>
-                <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
-                <li><a href="home.html#services" class="nav-link">Services</a></li>
-               <!-- <li><a href="" class="mobile-nav-link"></a></li> -->
+                <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+                <li><a href="about.html" class="mobile-nav-link ">About Us</a></li>
+                <li><a href="index.html#services" class="mobile-nav-link">services</a></li>
                 <li><a href="team.html" class="mobile-nav-link">Our Team</a></li>
                 <li><a href="contact.html" class="mobile-nav-link active">Contact</a></li>
-                <li><a href="reports.html" class="nav-link">Reports</a></li>
+                <li><a href="reports.html" class="mobile-nav-link">Reports</a></li>
             </ul>
         </nav>
     </div>
@@ -159,7 +159,7 @@
 
                 <!--form-->
                 <div style="background-color: #f7fafc; padding: 3rem; border-radius: var(--radius-lg);">
-                    <form id="contactForm" class="contact-form">
+                    <form id="contactForm" action="https://formspree.io/f/mwvrzpka" method="POST">
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
                             <div class="form-group">
                                 <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Full Name</label>
@@ -189,14 +189,43 @@
         </div>
     </main>
 
-   <!-- Footer -->
+
+<!-- CTA Consultation -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">InfoMineral</h2>
+                    <p class="cta-description">
+                        Contact us today<!--PR-->
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="tel:+268 7839 7903" class="btn btn-lg btn-primary">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/>
+                            </svg>
+                            Call Now
+                        </a>
+                        <a href="https://wa.me/+268 7839 7903" target="_blank" class="btn btn-lg btn-whatsapp">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.93 7.93 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326M7.994 14.521a6.57 6.57 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.6 6.6 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.932 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.774-.114.133-.229.148-.423.05-.197-.099-.834-.308-1.589-.983-.587-.525-.983-1.175-1.098-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                            </svg>
+                            WhatsApp
+                        </a>
+                        <a href="index.html#contact" class="btn btn-lg btn-outline">Contact Form</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                     <div class="logo">
+                    <div class="logo">
                         <div class="logo-text"  fill="currentColor   style="display: flex; space-between; align-items: left;">
-                            <a href="#home"> <img src="logo.jpg" alt="InfoMineral Logo">
+                            <a href="index.html"> <img src="logo.jpg" alt="InfoMineral Logo">
                             </div>
                         
                         <div class="footer-logo">
@@ -204,9 +233,9 @@
                             <span class="logo-name" style="color: white;">InfoMinerals</span>
                             <span class="footer-tagline">Data is the new wealth</span>
                         </div>
-                   
-                   </a>
                     </div>
+                    </a>
+                </div>
                     <p class="footer-about">
                         <!--PR-->
                     </p>
@@ -215,8 +244,8 @@
                 <div class="footer-section">
                     <h3>Services</h3>
                     <ul class="footer-links">
-                        <li><a href="home.html#services">Data Collection</a></li>
-                        <li><a href="#home.htmlservices">Data Cleaning</a></li>
+                        <li><a href="index.html#services">Data Collection</a></li>
+                        <li><a href="index.html#services">Data Cleaning</a></li>
 
                     </ul>
                 </div>
@@ -224,9 +253,9 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="home.html">Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
-                        <li><a href="home.html#services">services</a></li>
+                        <li><a href="index.html#services">services</a></li>
                         <li><a href="team.html">Our Team</a></li>
                         
                         <li><a href="contact.html">Contact</a></li>
@@ -265,9 +294,9 @@
                         &copy; 2026 InfoMineral. All rights reserved.
                     </p>
                     <div class="legal-links">
-                        <a href="#">Terms of Service</a>
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Sitemap</a>
+                        <a href="terms of service.html">Terms of Service</a>
+                        <a href="privacy policy.html">Privacy Policy</a>
+                      <!--  <a href="#">Sitemap</a> -->
                     </div>
                 </div>
             </div>
