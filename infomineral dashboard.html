@@ -584,6 +584,13 @@
 <body>
   <div class="sidebar">
     <div class="sidebar-header">
+
+      <!--
+      <div class="logo-text" style="display: flex; justify-content: space-between; align-items: left;">
+                            <a href="index.html"><img src="logo.jpg" alt="InfoMineral Logo">
+                            </div>
+        -->
+
       <h2><i class="fas fa-chart-line"></i> <span>InfoMineral</span></h2>
     </div>
     <nav class="sidebar-nav">
@@ -727,6 +734,8 @@
         <input type="text" id="editProjectOwner" placeholder="Project Owner" required>
       </div>
       <div style="display: flex; gap: 10px;">
+        
+
         <button class="btn btn-success" id="updateBtn" onclick="updateProject()" style="flex: 1;"><i class="fas fa-save"></i> Update Project</button>
         <button class="btn btn-danger" onclick="closeEditModal()" style="width: auto;"><i class="fas fa-times"></i> Cancel</button>
       </div>
@@ -1125,6 +1134,40 @@ async function openEditModal(projectId) {
         modal.style.display = 'none';
       }
     }
-  </script>
+
+    
+  function updateProject() {
+    // Example: grab values from form fields
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    // Do something with the data (update DOM, send to server, etc.)
+    console.log("Updating project with:", { name, phone, email, message });
+
+    // Example: show a success message
+    alert("Project updated successfully!");
+  }
+
+
+projects.forEach(project => {
+  document.body.innerHTML += `
+    <div id="${project.id}">
+      <p>${project.name}</p>
+      <button class="btn btn-danger btn-small" onclick="deleteProject('${project.id}')">
+        <i class="fas fa-trash"></i> Delete
+      </button>
+    </div>
+  `;
+});
+
+function deleteProject(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+
+</script>
 </body>
 </html>

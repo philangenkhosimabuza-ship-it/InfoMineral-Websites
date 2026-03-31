@@ -3,8 +3,37 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>FAQs | InfoMineral</title>
+	<title>Freqently Aseked Questions | InfoMineral</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+   <style>
+    .footer-social {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-social a {
+    color: white;              /* force white color */
+    font-size: 18px;
+    transition: 0.3s;
+    text-decoration: none;     /* remove underline */
+}
+
+/* Remove blue and purple states */
+.footer-social a:visited {
+    color: white;
+}
+
+.footer-social a:active {
+    color: white;
+}
+
+.footer-social a:hover {
+    color: gold;
+    transform: translateY(-3px);
+}
+</style>
 </head>
 <body>
 
@@ -15,7 +44,7 @@
             <div class="header-content">
                  <div class="logo">
                         <div class="logo-text" style="display: flex; justify-content: space-between; align-items: left;">
-                            <a href="home.html"><a href="#home"> <img src="logo.jpg" alt="InfoMineral Logo">
+                            <a href="index.html"><a href="#home"> <img src="logo.jpg" alt="InfoMineral Logo">
                             </div>
                         
                             <div class="logo">
@@ -26,14 +55,14 @@
                 </div>
                 <nav class="desktop-nav">
                     <ul>
-                        <li><a href="home.html" class="nav-link">Home</a></li>
+                        <li><a href="index.html" class="nav-link">Home</a></li>
                         <li><a href="about.html" class="nav-link">About Us</a></li>
                         <li class="dropdown">
-                            <a href="home.html#services" class="nav-link">Services</a>
+                            <a href="index.html#services" class="nav-link">Services</a>
                             <div class="dropdown-menu">
                                 
-                                 <a href="home.html#services">Data Collection</a>
-                                <a href="home.html#services">Data Cleaning</a>
+                                 <a href="index.html#services">Data Collection</a>
+                                <a href="index.html#services">Data Cleaning</a>
                                 
                             </div>
                         </li>
@@ -57,13 +86,14 @@
                     </ul>
                 </nav>
                  <div class="header-cta">
+                    <!--login button
                     <a href="login.html" class="contact-link">
                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                        <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
                        <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
                    </svg>
                         
-                    </a>
+                    </a> -->
                 </div>
               
                 <button class="mobile-menu-btn">
@@ -86,9 +116,9 @@
         </div>
         <nav class="mobile-nav">
             <ul>
-                <li><a href="home.html" class="mobile-nav-link">Home</a></li>
+                <li><a href="index.html" class="mobile-nav-link">Home</a></li>
                 <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
-                <li><a href="home.html#services" class="mobile-nav-link">services</a></li>
+                <li><a href="index.html#services" class="mobile-nav-link">services</a></li>
                 <li><a href="team.html" class="mobile-nav-link">Our Team</a></li>
                 <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
                 <li><a href="reports.html" class="mobile-nav-link">Reports</a></li>
@@ -100,7 +130,7 @@
     <!-- Page Header -->
     <section class="section bg-primary text-white" style="padding: 4rem 0;">
         <div class="container">
-            <h1 style="font-family: var(--font-serif); font-size: 3rem; margin-bottom: 1rem;">FAQ</h1>
+            <h1 style="font-family: var(--font-serif); font-size: 3rem; margin-bottom: 1rem;">Frequently Aseked Questions</h1>
             <p style="font-size: 1.25rem; opacity: 0.9;">Frequently Asked Questions about our services.</p>
         </div>
     </section>
@@ -372,8 +402,8 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="logo">
-                        <div class="logo-text"  fill="currentColor   style="display: flex; space-between; align-items: left;">
-                            <a href="home.html"> <img src="logo.jpg" alt="InfoMineral Logo">
+                        <div class="logo-text"  fill="currentColor   style="display: flex; space-between; align-items: left;>
+                            <a href="index.html"> <img src="logo.jpg" alt="InfoMineral Logo">
                             </div>
                         
                         <div class="footer-logo">
@@ -392,8 +422,8 @@
                 <div class="footer-section">
                     <h3>Services</h3>
                     <ul class="footer-links">
-                        <li><a href="home.html#services">Data Collection</a></li>
-                        <li><a href="home.html#services">Data Cleaning</a></li>
+                        <li><a href="index.html#services">Data Collection</a></li>
+                        <li><a href="index.html#services">Data Cleaning</a></li>
 
                     </ul>
                 </div>
@@ -401,9 +431,9 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="home.html">Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
-                        <li><a href="home.html#services">services</a></li>
+                        <li><a href="index.html#services">services</a></li>
                         <li><a href="team.html">Our Team</a></li>
                         
                         <li><a href="contact.html">Contact</a></li>
@@ -433,6 +463,21 @@
                             <span>Eswatini, Hhohho, Mbabane, Sdvwashini, Limkokwing</span>
                         </div>
                     </div>
+
+
+                    <!-- Social Media -->
+        <div class="footer-box">
+            <br>
+            <h3>Follow Us</h3>
+              <div class="footer-social">
+                        <a href="https://www.facebook.com/profile.php?id=61582131389597" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/infomineral_" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@user7270380756331" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/+268 7839 7903" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.linkedin.com/@informineral-research-and-data-firm" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+        </div>
+
                 </div>
             </div>
 
