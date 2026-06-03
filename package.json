@@ -2,7 +2,8 @@
   "name": "framer-motion-starter",
   "version": "1.0.0",
   "description": "A comprehensive Framer Motion starter template for all your web projects",
-  "main": "index.js",
+  "main": "src/main.jsx",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,7 +14,8 @@
     "framer-motion",
     "animations",
     "react",
-    "starter-template"
+    "starter-template",
+    "vite"
   ],
   "author": "philangenkhosimabuza-ship-it",
   "license": "MIT",
