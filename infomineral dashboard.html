@@ -649,6 +649,9 @@
         <input type="file" id="pdfUpload" accept="application/pdf" style="padding: 10px; border: 2px dashed var(--primary); border-radius: 6px; cursor: pointer;">
       </div>
       <div id="pdfViewer">PDF content will appear here after upload...</div>
+      <br>
+         <button class="btn btn-primary" id="createBtn" onclick="addProject()"><i class="fas fa-add"></i> Add Project</button>
+
     </div>
 
     <!-- Data Sources Section -->
@@ -713,6 +716,7 @@
     </div>
   </div>
 
+
   <!-- Edit Modal -->
   <div id="editModal" class="modal">
     <div class="modal-content">
@@ -741,6 +745,7 @@
       </div>
     </div>
   </div>
+
 
   <script>
     const API_URL = 'api.php';
@@ -865,7 +870,10 @@
       createBtn.disabled = false;
       createBtn.innerHTML = '<i class="fas fa-check"></i> Create Project';
     }
-// FIXED: Open Edit Modal
+
+    let projects = JSON.parse(localStorage.getItem("projects")) || [];
+
+//Open Edit Modal
 async function openEditModal(projectId) {
   console.log('Opening modal for project ID:', projectId, 'Type:', typeof projectId);
   
@@ -906,6 +914,27 @@ async function openEditModal(projectId) {
     showAlert('Error opening edit modal', 'danger');
   }
 }
+
+
+/*---- */
+
+
+  // Function to handle Add Project button
+ async function addProject() {
+    // Ask user for project name
+    const projectName = prompt("Enter project name:");
+
+      // Append to the projects list
+      document.getElementById("projectsList").appendChild(li);
+
+      // Show the Projects section
+      showSection("projects");
+    }
+  
+
+
+
+
 
   // ==================== ERROR LOGS ====================
 
@@ -1135,20 +1164,42 @@ async function openEditModal(projectId) {
       }
     }
 
-    
-  function updateProject() {
-    // Example: grab values from form fields
-    const name = document.getElementById("name").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
-    const message = document.getElementById("message").value;
+ async function updateProject() {
+  // Grab values from the edit modal fields
+  const id = document.getElementById("editProjectId").value;
+  const name = document.getElementById("editProjectName").value;
+  const description = document.getElementById("editProjectDescription").value;
+  const owner = document.getElementById("editProjectOwner").value;
 
-    // Do something with the data (update DOM, send to server, etc.)
-    console.log("Updating project with:", { name, phone, email, message });
 
-    // Example: show a success message
-    alert("Project updated successfully!");
+
+  const result = await apiCall('update_project', 'POST', { id, name, description, owner }) ;
+
+
+  // Do something with the data (update DOM, send to server, etc.)
+  projects = projects.map(p =>
+    p.id === id ? { ...p, name, description, owner } : p
+  );
+
+   // Save back to localStorage (or send to server)
+  localStorage.setItem("projects", JSON.stringify(projects));
+
+
+  // Example: show a success message
+  alert("Project updated successfully!");
+
+
+
+  function openEditModal() {
+    document.getElementById("editModal").style.display = "block";
   }
+
+  window.location.href = "infomineral dashboard.html"; // or wherever you want to go
+
+  }
+
+
+
 
 
 projects.forEach(project => {
@@ -1162,10 +1213,42 @@ projects.forEach(project => {
   `;
 });
 
-function deleteProject(id) {
-  const el = document.getElementById(id);
-  if (el) el.remove();
+async function deleteProject(projectId) {
+  if (!confirm("Are you sure you want to delete this project?")) {
+    return; // user cancelled
+  }
+
+  // Call your backend API to delete
+  const result = await apiCall('delete_project', 'POST', { id: projectId });
+
+  if (result.success) {
+    showAlert('Project deleted successfully!', 'success');
+    await loadProjects(); // reload the list from server
+  } else {
+    showAlert('Error deleting project: ' + result.message, 'danger');
+  }
 }
+
+ async function updateProject() {
+    const id = document.getElementById("editProjectId").value;
+    const name = document.getElementById("editProjectName").value;
+    const description = document.getElementById("editProjectDescription").value;
+    const owner = document.getElementById("editProjectOwner").value;
+
+    console.log("Updating project with:", { id, name, description, owner });
+    alert("Project updated successfully!");
+    closeEditModal();
+  }
+
+  function closeEditModal() {
+    document.getElementById("editModal").style.display = "none";
+  }
+
+  function openEditModal(projectId) {
+    // Pre-fill modal fields if needed
+    document.getElementById("editProjectId").value = projectId;
+    document.getElementById("editModal").style.display = "block";
+  }
 
 
 </script>
