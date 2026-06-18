@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>InfoMineral Secure Login System</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .hidden { display: none; }
+    .section { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
+    h2 { margin-top: 0; }
+    input, button { margin: 5px 0; padding: 5px; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 5px 0; }
+    .chart { width: 200px; height: 100px; background: lightblue; margin: 10px 0; }
+    .timeline { display: flex; gap: 10px; margin: 10px 0; }
+    .timeline div { width: 30px; height: 30px; background: lightgreen; text-align: center; }
+    .warning { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>InfoMineral Platform</h1>
+
+  <!-- Public Frontend -->
+  <div class="section">
+    <h2>Public Resources</h2>
+    <p>Reports, journals, and community updates available without login.</p>
+  </div>
+
+  <!-- Registration -->
+  <div id="register" class="section">
+    <h2>Register New User</h2>
+    <input id="regEmail" type="text" placeholder="Email"><br>
+    <input id="regPassword" type="password" placeholder="Password"><br>
+    <button onclick="register()">Register</button>
+    <p id="regMsg"></p>
+  </div>
+
+  <!-- Authentication -->
+  <div id="auth" class="section">
+    <h2>Login</h2>
+    <input id="email" type="text" placeholder="Email"><br>
+    <input id="password" type="password" placeholder="Password"><br>
+    <button onclick="login()">Login</button>
+    <p id="authMsg"></p>
+  </div>
+
+  <!-- 2FA Verification -->
+  <div id="twoFA" class="section hidden">
+    <h2>Two-Factor Authentication</h2>
+    <p>A verification code has been generated: <strong id="codeDisplay"></strong></p>
+    <input id="codeInput" type="text" placeholder="Enter code"><br>
+    <button onclick="verifyCode()">Verify</button>
+    <button onclick="resendCode()">Resend Code</button>
+    <p id="twoFAMsg"></p>
+  </div>
+
+  <!-- Client Portal -->
+  <div id="clientPortal" class="section hidden">
+    <h2>Client Portal</h2>
+    <p>Welcome, <span id="clientName"></span>!</p>
+    <h3>Dashboard</h3>
+    <div class="chart">📊 Project Chart</div>
+    <div class="timeline">
+      <div>1</div><div>2</div><div>3</div>
+    </div>
+    <h3>Projects</h3>
+    <ul id="projectList"></ul>
+  </div>
+
+  <!-- Admin Backend -->
+  <div id="adminBackend" class="section hidden">
+    <h2>Admin Backend <span class="warning">(Secure Area)</span></h2>
+    <p class="warning">⚠️ Classified Information — Authorized Staff Only</p>
+    <input id="projectName" type="text" placeholder="Project Name"><br>
+    <input id="projectDetails" type="text" placeholder="Project Details"><br>
+    <button onclick="addProject()">Add Project</button>
+    <h3>All Projects</h3>
+    <ul id="adminProjectList"></ul>
+  </div>
+
+<script>
+  const users = [];
+  const projects = [];
+  let pendingUser = null;
+  let generatedCode = null;
+
+  function register() {
+    const email = document.getElementById("regEmail").value;
+    const password = document.getElementById("regPassword").value;
+
+    if (!email || !password) {
+      document.getElementById("regMsg").textContent = "Please fill all fields.";
+      return;
+    }
+
+    if (users.find(u => u.email === email)) {
+      document.getElementById("regMsg").textContent = "User already exists!";
+      return;
+    }
+
+    // Auto-detect role
+    let role = email.toLowerCase().includes("admin") ? "admin" : "client";
+
+    users.push({ email, password, role });
+    document.getElementById("regMsg").textContent = `Registration successful! Role detected: ${role}`;
+  }
+
+  function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if (user) {
+      // Generate 2FA code
+      generatedCode = generateCode();
+      pendingUser = user;
+      document.getElementById("authMsg").textContent = "Login successful! Please verify with 2FA.";
+      document.getElementById("auth").classList.add("hidden");
+      document.getElementById("register").classList.add("hidden");
+      document.getElementById("twoFA").classList.remove("hidden");
+      document.getElementById("codeDisplay").textContent = generatedCode;
+    } else {
+      document.getElementById("authMsg").textContent = "Invalid credentials!";
+    }
+  }
+
+  function generateCode() {
+    return Math.floor(1000 + Math.random() * 9000); // 4-digit code
+  }
+
+  function resendCode() {
+    generatedCode = generateCode();
+    document.getElementById("codeDisplay").textContent = generatedCode;
+    document.getElementById("twoFAMsg").textContent = "New code generated!";
+  }
+
+  function verifyCode() {
+    const entered = document.getElementById("codeInput").value;
+    if (parseInt(entered) === generatedCode) {
+      document.getElementById("twoFAMsg").textContent = "2FA verified!";
+      document.getElementById("twoFA").classList.add("hidden");
+
+      if (pendingUser.role === "client") {
+        document.getElementById("clientPortal").classList.remove("hidden");
+        document.getElementById("clientName").textContent = pendingUser.email;
+        renderProjects("projectList");
+      } else if (pendingUser.role === "admin") {
+        document.getElementById("adminBackend").classList.remove("hidden");
+        renderProjects("adminProjectList");
+      }
+    } else {
+      document.getElementById("twoFAMsg").textContent = "Incorrect code!";
+    }
+  }
+
+  function addProject() {
+    const name = document.getElementById("projectName").value;
+    const details = document.getElementById("projectDetails").value;
+    projects.push({ name, details });
+    renderProjects("adminProjectList");
+    renderProjects("projectList");
+  }
+
+  function renderProjects(listId) {
+    const list = document.getElementById(listId);
+    list.innerHTML = "";
+    projects.forEach(p => {
+      const li = document.createElement("li");
+      li.textContent = `${p.name} - ${p.details}`;
+      list.appendChild(li);
+    });
+  }
+</script>
+</body>
+</html>
